@@ -60,24 +60,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 	<meta charset="UTF-8">
 	<title>Sign In</title>
-	<link rel="stylesheet" href="./assets/styles/styles.css">
+	<link rel="stylesheet" href="./assets/styles/sign-in.css">
+	<link rel="stylesheet" href="./assets/styles/reset.css">
 </head>
 
 <body>
 	<div class="container">
-		<h2>Sign In</h2>
-		<form class="signin-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-			<div class="form-group">
-				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" required>
-			</div>
-			<div class="form-group">
-				<label for="password">Password:</label>
-				<input type="password" id="password" name="password" required>
-			</div>
-			<button type="submit">Sign In</button>
-		</form>
-		<p>Don't have an account? <a href="sign-up.php">Sign Up</a></p>
+		<div class="form-container">
+			<h2 class="form-title">Sign In</h2>
+			<form id="signin-form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+				<button type="submit">Sign In</button>
+			</form>
+			<p>Don't have an account? <a href="sign-up.php">Sign Up</a></p>
+		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

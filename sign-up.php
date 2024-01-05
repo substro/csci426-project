@@ -70,33 +70,65 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <head>
 	<meta charset="UTF-8">
 	<title>Sign Up</title>
-	<link rel="stylesheet" href="./assets/styles/styles.css">
+	<link rel="stylesheet" href="./assets/styles/sign-up.css">
+	<link rel="stylesheet" href="./assets/styles/reset.css">
+
 </head>
 
 <body>
 	<div class="container">
-		<form class="signup-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-			<h2>Sign Up</h2>
-			<div class="form-group">
-				<label for="firstName">First Name *:</label>
-				<input type="text" id="firstName" name="firstName" required>
-			</div>
-			<div class="form-group">
-				<label for="lastName">Last Name *:</label>
-				<input type="text" id="lastName" name="lastName" required>
-			</div>
-			<div class="form-group">
-				<label for="email">Email *:</label>
-				<input type="email" id="email" name="email" required>
-			</div>
-			<div class="form-group">
-				<label for="password">Password *:</label>
-				<input type="password" id="password" name="password" required>
-			</div>
-			<button type="submit">Sign Up</button>
-		</form>
-		<p>Don't have an account? <a href="sign-in.php">Sign In</a></p>
+		<div class="form-container">
+			<form id="signup-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+				<h2 class="form-title">Sign Up</h2>
+				<div class="form-group">
+					<label for="firstName">First Name *:</label>
+					<input type="text" id="firstName" name="firstName" required>
+				</div>
+				<div class="form-group">
+					<label for="lastName">Last Name *:</label>
+					<input type="text" id="lastName" name="lastName" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Email *:</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Password *:</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+				<button type="submit">Sign Up</button>
+			</form>
+			<p>Already have an account? <a href="sign-in.php">Sign In</a></p>
+		</div>
 	</div>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('.signup-form').submit(function(event) {
+				event.preventDefault(); // Prevent form submission
+
+				// Perform an AJAX form submission
+				$.ajax({
+					type: $(this).attr('method'),
+					url: $(this).attr('action'),
+					data: $(this).serialize(),
+					dataType: 'json',
+					success: function(response) {
+						if (response.userExists === 1) {
+							// Redirect to home.php upon successful login
+							window.location.href = "home.php";
+						} else {
+							// Handle error messages if needed
+							console.log(response.message);
+						}
+					}
+				});
+			});
+		});
+	</script> -->
+
 </body>
 
 </html>

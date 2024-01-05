@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (strtotime($deadLine) <= strtotime($startDate)) {
         echo "The deadline cannot be shorter than or equal to the start date";
     } else {
-        $sql = "INSERT INTO project(shortCode, projectName, startDate, deadLine, projectCategory, projectMembers) 
+        $sql = "INSERT INTO projects(shortCode, projectName, startDate, deadLine, projectCategory, projectMembers) 
                 VALUES('$shortCode','$projectName','$startDate','$deadLine','$projectCategory','$projectMembers')";
 
         if (mysqli_query($conn, $sql)) {

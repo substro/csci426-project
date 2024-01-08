@@ -7,6 +7,9 @@ include("config/config.php");
 // Starting the session
 session_start();
 
+// Initialize the response array
+$response = [];
+
 // Check if the form has been submitted using the POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
@@ -18,46 +21,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender = $_POST['gender'];
     $date_of_birth = $_POST['dateOfBirth'];
     $about = $_POST['bio'];
-    $profile_pic = $_POST['profileImg'];
     $phone_code = isset($_POST['phoneCode']) ? $_POST['phoneCode'] : ''; // Handle empty phone_code
-
-    
 
     // Check if the user is logged in
     if (!isset($_SESSION['userID'])) {
-        echo "User not logged in";
+        $response['message'] = "User not logged in";
+        echo json_encode($response);
         exit();
     }
 
     // Get user_id from the session
     $userID = $_SESSION['userID'];
-    // Update user_profile table without prepared statement
+
+    // Update user_profile table with prepared statement
     $sql_update_profile = "UPDATE users
-                             SET firstName = '$firstname',
-                                 lastName = '$lastname',
-                                 email = '$email',
-                                 countryName = '$country_name',
-                                 phoneNb = '$phone_number',
-                                 gender = '$gender',
-                                 dateOfBirth = '$date_of_birth',
-                                 bio = '$bio',
-                                 profileImg = '$profile_pic',
-                                 phoneCode = '$phone_code'
-                           WHERE userID = $userID";
+                           SET firstName = ?,
+                               lastName = ?,
+                               email = ?,
+                               countryName = ?,
+                               phoneNb = ?,
+                               gender = ?,
+                               dateOfBirth = ?,
+                               bio = ?,
+                               phoneCode = ?
+                           WHERE userID = ?";
+
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql_update_profile);
+
+    // Bind parameters
+    mysqli_stmt_bind_param($stmt, "sssssssssi", $firstname, $lastname, $email, $country_name, $phone_number, $gender, $date_of_birth, $about, $phone_code, $userID);
 
     // Execute the update query
-    $result_update_profile = mysqli_query($conn, $sql_update_profile);
+    $result_update_profile = mysqli_stmt_execute($stmt);
 
     if ($result_update_profile) {
         // Update successful
-        echo "Profile updated successfully";
+        $response['message'] = "Profile updated successfully";
     } else {
         // Update failed
-        echo "Error updating profile: " . mysqli_error($conn);
-        echo "<br>Query: " . $sql_update_profile; // Output the query for debugging
+        $response['error'] = "Error updating profile: " . mysqli_error($conn);
+        $response['query'] = $sql_update_profile; // Output the query for debugging
     }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
 } else {
     // Form not submitted using the POST method
-    echo "Form not submitted";
+    $response['message'] = "Form not submitted";
 }
+
+// Output the response as JSON
+echo json_encode($response);
 ?>

@@ -73,8 +73,8 @@
 
     <label for="gender">Select Gender:</label>
     <select name="gender" id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
     </select> <br>
 
     <label for="date_of_birth">Date of Birth:</label>
@@ -83,8 +83,6 @@
     <label for="bio">About:</label>
     <textarea id="bio" name="bio" rows="4" cols="50"></textarea> <br>
 
-    <label for="profile_pic">Profile Picture:</label>
-    <input type="file" id="profile_pic" name="profileImg" enctype="multipart/form-data">
 
     <button type="submit" id="save" onclick="updateData()">Save</button>
 
@@ -99,18 +97,22 @@
             type: "POST",
             url: "updatingData.php",
             data: form,
+            dataType: "json", // Specify that the response is JSON
             success: function (response) {
-                alert(response);
+                alert(response.message || "Profile update response is missing."); // Display the message from the server or a default message
             },
             error: function (error) {
-                alert(error);
+                alert("Error updating profile: " + (error.responseJSON ? error.responseJSON.error : "Unknown error"));
             }
         });
+        return false; // Prevent the form from submitting normally
     }
-</script>
 
-<script>
     $(document).ready(function () {
+        $("#settingForm").submit(function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            updateData(); // Call the updateData function
+        });
         function fetchUserProfileData() {
             $.ajax({
                 type: "POST",

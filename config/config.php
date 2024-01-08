@@ -1,12 +1,18 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'id21647230_teamsyncdb');
+
+$server = "localhost";
+$user = "id21647230_project1234";
+$password = "Project123456$";
+ $db_name = "id21647230_project";
+
+ $conn = mysqli_connect($server,$user,$password,$db_name);
+ 
+//  if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// }
+
+// echo "Connected successfully";
+// mysqli_close($conn);
 
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+?>

@@ -1,0 +1,64 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container for content */
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: #f4f5f7;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+.heading {
+  font-size: 48px;
+  font-weight: 700;
+  color: #4caf50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.subheading {
+  font-size: 24px;
+  font-weight: 400;
+  color: #4a4a4a;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Main content */
+.content {
+  line-height: 1.6;
+  font-size: 18px;
+  color: #4a4a4a;
+  text-align: justify;
+  padding: 20px;
+}
+
+/* Sign-in button */
+.sign-in-button {
+  background-color: #4caf50; /* Green background */
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-weight: bold;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Center the text within the button */
+}
+
+.sign-in-button:hover {
+  background-color: #3e8e41; /* Darker green on hover */
+}

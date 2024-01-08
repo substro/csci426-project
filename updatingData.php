@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include("config.php");
+include("config/config.php");
 
 // Starting the session
 session_start();
@@ -11,7 +11,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     $firstname = $_POST['firstName'];
-    $lastname = $_POST['lasttName'];
+    $lastname = $_POST['lastName'];
     $email = $_POST['email'];
     $country_name = $_POST['countryName'];
     $phone_number = $_POST['phoneNb'];
@@ -61,5 +61,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Form not submitted";
 }
 ?>
-
-

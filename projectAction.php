@@ -1,5 +1,13 @@
 <?php
-include("config.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include("config/config.php");
+
+// Ensure the connection to the database is successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $shortCode = $_POST["shortcode"];
@@ -19,9 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_query($conn, $sql)) {
             echo "Data inserted successfully";
-            
         } else {
-            echo "Error: Unable to save data to the database.";
+            echo "Error: Unable to save data to the database. " . mysqli_error($conn);
         }
     }
 

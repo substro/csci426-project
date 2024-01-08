@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,14 +52,14 @@
                         method: "POST",
                         data: { result: result },
                         success: function (data) {
-                            $("#searchResult").html(data);
+                            $("#projectsContainer").html(data);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.error("Ajax request failed: " + textStatus, errorThrown);
                         }
                     });
                 } else {
-                    $("#searchResult").html("");
+                    $("#projectsContainer").html(data);
                 }
             });
         });
